@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
+import { PlatesModule } from './plates/plates.module';
 
 @Module({
-  imports: [],
+  imports: [PlatesModule],
   controllers: [],
   providers: [],
 })
