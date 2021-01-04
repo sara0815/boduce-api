@@ -10,8 +10,12 @@ export type PlateDocument = Plate & Document;
   },
 })
 export class Plate {
-  @Prop()
+  @Prop({ required: true })
   name: string;
+  @Prop([String])
+  tags: string[];
+  @Prop()
+  vote: number;
 }
 
 export const PlateSchema = SchemaFactory.createForClass(Plate);

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreatePlateDto } from './dto/create-plate.dto';
@@ -17,5 +17,20 @@ export class PlatesService {
 
   async findAll(): Promise<Plate[]> {
     return this.plateModel.find().exec();
+  }
+
+  async findByplateId(plateId: string): Promise<Plate> {
+    const plate = this.plateModel.findById(plateId);
+    if (!plate) {
+      throw new NotFoundException(`Plate with ID ${plateId} is not found.`);
+    }
+    return plate;
+  }
+
+  async vote(plateId: string) {
+    const plate = this.findByplateId(plateId);
+    return this.plateModel.findByIdAndUpdate(plateId, {
+      vote: (await plate).vote ? (await plate).vote + 1 : 1,
+    });
   }
 }
