@@ -19,7 +19,7 @@ export class PlatesService {
     return this.plateModel.find().exec();
   }
 
-  async findByplateId(plateId: string): Promise<Plate> {
+  async findByPlateId(plateId: string): Promise<Plate> {
     const plate = this.plateModel.findById(plateId);
     if (!plate) {
       throw new NotFoundException(`Plate with ID ${plateId} is not found.`);
@@ -28,7 +28,7 @@ export class PlatesService {
   }
 
   async vote(plateId: string) {
-    const plate = this.findByplateId(plateId);
+    const plate = this.findByPlateId(plateId);
     return this.plateModel.findByIdAndUpdate(plateId, {
       vote: (await plate).vote ? (await plate).vote + 1 : 1,
     });
