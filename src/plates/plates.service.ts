@@ -15,8 +15,14 @@ export class PlatesService {
     return createdPlate.save();
   }
 
-  async findAll(): Promise<Plate[]> {
-    return this.plateModel.find().exec();
+  async findPlates(tags: string[]): Promise<Plate[]> {
+    const findArgs = {};
+    if (tags.length > 0) {
+      findArgs['tags'] = {
+        $all: tags,
+      };
+    }
+    return this.plateModel.find(findArgs).exec();
   }
 
   async findByPlateId(plateId: string): Promise<Plate> {

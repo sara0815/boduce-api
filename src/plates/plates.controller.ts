@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { CreatePlateDto } from './dto/create-plate.dto';
 import { PlatesService } from './plates.service';
 import { Plate } from './schemas/plate.schema';
@@ -7,8 +15,8 @@ import { Plate } from './schemas/plate.schema';
 export class PlatesController {
   constructor(private readonly plateService: PlatesService) {}
   @Get()
-  getAll(): Promise<Plate[]> {
-    return this.plateService.findAll();
+  findPlates(@Query('tags') tags: string[]): Promise<Plate[]> {
+    return this.plateService.findPlates(tags);
   }
 
   @Post()
