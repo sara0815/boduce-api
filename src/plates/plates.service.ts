@@ -26,11 +26,13 @@ export class PlatesService {
   }
 
   async findByPlateId(plateId: string): Promise<Plate> {
-    const plate = this.plateModel.findById(plateId);
-    if (!plate) {
+    try {
+      const plate = await this.plateModel.findById(plateId).exec();
+      console.log(plate);
+      return plate;
+    } catch (err) {
       throw new NotFoundException(`Plate with ID ${plateId} is not found.`);
     }
-    return plate;
   }
 
   async vote(plateId: string) {
