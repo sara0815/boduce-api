@@ -39,4 +39,8 @@ export class PlatesService {
       vote: (await plate).vote ? (await plate).vote + 1 : 1,
     });
   }
+
+  async findPopular() {
+    return this.plateModel.find().sort({ vote: -1 }).limit(3);
+  }
 }

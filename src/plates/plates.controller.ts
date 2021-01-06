@@ -28,4 +28,8 @@ export class PlatesController {
   vote(@Param('id') plateId: string) {
     return this.plateService.vote(plateId);
   }
+  @Get('/popular')
+  popular(): Promise<Plate[]> {
+    return this.plateService.findPopular();
+  }
 }
