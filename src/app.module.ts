@@ -3,6 +3,8 @@ import { PlatesModule } from './plates/plates.module';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from '@hapi/joi';
 import { MongooseModule } from '@nestjs/mongoose';
+import { VisitsController } from './visits/visits.controller';
+import { VisitsModule } from './visits/visits.module';
 
 @Module({
   imports: [
@@ -18,6 +20,7 @@ import { MongooseModule } from '@nestjs/mongoose';
     }),
     MongooseModule.forRoot(process.env.MONGO_URI),
     PlatesModule,
+    VisitsModule,
   ],
   controllers: [],
   providers: [],
