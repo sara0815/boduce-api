@@ -28,7 +28,6 @@ export class PlatesService {
   async findByPlateId(plateId: string): Promise<Plate> {
     try {
       const plate = await this.plateModel.findById(plateId).exec();
-      console.log(plate);
       return plate;
     } catch (err) {
       throw new NotFoundException(`Plate with ID ${plateId} is not found.`);
