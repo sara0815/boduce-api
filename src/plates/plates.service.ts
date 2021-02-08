@@ -17,7 +17,7 @@ export class PlatesService {
 
   async findPlates(tags: string[]): Promise<Plate[]> {
     const findArgs = {};
-    if (tags.length > 0) {
+    if (tags && tags.length > 0) {
       findArgs['tags'] = {
         $all: tags,
       };
